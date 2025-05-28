@@ -1,15 +1,69 @@
-from flask import Flask, request, jsonify, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect, url_for
+from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from db import db
 from models import Produto
+from models import Usuario
 
 app = Flask(__name__)
+app.secret_key = 'papagaio*'
+lm = LoginManager(app)
+lm.login_view = 'login'
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database.db"
 db.init_app(app)
+
+@lm.user_loader
+def user_loader(id):
+    usuario = db.session.query(Usuario).filter_by(id=id).first()
+    return usuario
+
+@app.route('/h')
+@login_required
+def home():
+    print(current_user)
+    return render_template('home.html')
 
 @app.route('/')
 def index():
     produtos = db.session.query(Produto).all()
     return render_template('index.html', produtos=produtos)
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'GET':
+        return render_template ('login.html')
+    elif request.method == 'POST':
+        usuario = request.form['usuarioForm']
+        senha = request.form['senhaForm']
+
+        user = db.session.query(Usuario).filter_by(usuario=usuario, senha=senha).first()
+
+        if not user:
+            return 'Usuário ou senha incorretos.'
+        
+        login_user(user)
+        return redirect(url_for('index.html'))
+
+@app.route('/cadastrar_user', methods=['GET', 'POST'])
+def cadastrar_user():
+    if request.method == 'GET':
+        return render_template('registrar_usuario.html')
+    elif request.method == 'POST':
+        usuario = request.form['usuarioForm']
+        senha = request.form['senhaForm']
+
+        novo_usuario = Usuario(usuario=usuario, senha=senha)
+        db.session.add(novo_usuario)
+        db.session.commit()
+
+        login_user(novo_usuario)
+
+        return redirect(url_for('index'))
+    
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
 
 @app.route('/registrar', methods=['GET', 'POST'])
 def registrar():
