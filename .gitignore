@@ -1,6 +1,7 @@
 # Ambiente virtual
 venv/
 .env/
+.env
 
 # Banco de dados local
 instance/*.db
