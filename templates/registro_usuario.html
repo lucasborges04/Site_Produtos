@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Registrar Usuário</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="login-body">
+  <div class="login-container">
+    <div class="login-card registro-card">
+      <div class="login-header">
+        <h1>Criar Conta</h1>
+        <p>Preencha os campos para se registrar</p>
+      </div>
+      <div class="login-form-container">
+        <form action="{{ url_for('registrar_usuario') }}" method="POST" class="login-form registro-form">
+          <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-group password-input">
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" name="senha" required>
+          </div>
+          <button type="submit" class="btn-editar">Registrar</button>
+        </form>
+        <div class="login-footer">
+          <p>Já possui uma conta? <a href="{{ url_for('login') }}" class="register-link">Entrar</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

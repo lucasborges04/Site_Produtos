@@ -6,7 +6,8 @@ class Usuario(UserMixin, db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(150), nullable=False, unique=True)
-    senha = db.Column(db.String())
+    senha = db.Column(db.String(150))
+    reset_token = db.Column(db.String(100), nullable=True)
 
 class Produto(db.Model):
     __tablename__ = 'produtos'

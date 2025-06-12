@@ -3,13 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login - Sistema de Produtos</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
-<body>
-    <form action="">
-        Usuario: <input type="text" name="usuarioForm"><br>
-        Senha: <input type="text" name="senhaForm"><br>
-        <input type="submit" value="Login">
-    </form>
+<body class="login-body">
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <h1><i class="fas fa-lock"></i> Login</h1>
+            </div>
+            
+            <div class="login-form-container">
+                <form action="" method="post" class="login-form">
+                    {% if error %}
+                        <div class="error-message">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            {{ error }}
+                        </div>
+                    {% endif %}
+                    
+                    <div class="form-group">
+                        <label for="email"><i class="fas fa-envelope"></i> Email:</label>
+                        <input type="email" name="email" id="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="senha"><i class="fas fa-key"></i> Senha:</label>
+                        <input type="password" name="senha" id="senha" required>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <input type="submit" value="Entrar" class="btn-primary">
+                    </div>
+                </form>
+                
+                <div class="login-footer">
+                    <p>Não tem conta? <a href="/registrar-usuario" class="register-link">Registre-se</a></p>
+                </div>
+                
+                {% if mensagem %}
+                <div class="success-message">
+                    <i class="fas fa-check-circle"></i>
+                    <ul>
+                        <li>{{ mensagem }}</li>
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginCard = document.querySelector('.login-card');
+            loginCard.style.opacity = '0';
+            loginCard.style.transform = 'translateY(50px)';
+            
+            setTimeout(() => {
+                loginCard.style.transition = 'all 0.6s ease';
+                loginCard.style.opacity = '1';
+                loginCard.style.transform = 'translateY(0)';
+            }, 100);
+        });
+    </script>
 </body>
 </html>
