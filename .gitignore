@@ -1,0 +1,17 @@
+# Ambiente virtual
+venv/
+.env/
+
+# Banco de dados local
+instance/*.db
+
+# Arquivos Python compilados
+__pycache__/
+*.pyc
+
+# VSCode settings (caso use)
+.vscode/
+
+# Arquivos temporários e logs
+*.log
+*.tmp
