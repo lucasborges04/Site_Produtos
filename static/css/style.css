@@ -710,3 +710,23 @@ body {
   border-color: #e53e3e;
   box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.1);
 }
+
+.btn-sair {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: #e74c3c;
+    color: white;
+    padding: 6px 10px;
+    font-size: 14px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: background-color 0.3s;
+    z-index: 1000;
+}
+
+.btn-sair:hover {
+    background-color: #c0392b;
+}
