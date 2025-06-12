@@ -51,10 +51,6 @@ python main.py
 
 A aplicação estará rodando em http://localhost:5000
 
-<<<<<<< HEAD
 ### 🗃️ Banco de Dados
-=======
-🗃️ Banco de Dados
->>>>>>> 706733a2f51f066040d3125367b6a97984ef40be
 
 O sistema usa SQLite. O banco é criado automaticamente na pasta instance/ na primeira execução.
