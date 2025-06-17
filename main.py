@@ -90,8 +90,7 @@ def esqueci_senha():
             token = str(uuid.uuid4())
             usuario.reset_token = token
             db.session.commit()
-            # Aqui, em um sistema real, você enviaria por e-mail
-            flash(f"Link de redefinição: {url_for('resetar_senha', token=token, _external=True)}")
+            return redirect(url_for('resetar_senha', token=token))
         else:
             flash("Email não encontrado.")
         return redirect(url_for('esqueci_senha'))
